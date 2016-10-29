@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
 import http, {Server} from 'http';
 import helmet from 'helmet';
@@ -16,12 +16,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-const router = Router()
-router.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the coolest API on earth!' })
-});
+import { WebhookRouter } from './routes/webhook';
 
-app.use('/webhook', router);
+app.use('/webhook', WebhookRouter);
 
 var server = Server(app);
 
